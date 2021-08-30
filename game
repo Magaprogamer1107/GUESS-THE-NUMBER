@@ -1,0 +1,52 @@
+import random
+import math
+from heapq import nsmallest
+# Taking Inputs
+name = (input('input your name'))
+
+lower = int(input("Enter Lower bound:- "))
+
+# Taking Inputs
+upper = int(input("Enter Upper bound:- "))
+
+# generating random number between
+# the lower and upper
+x = random.randint(lower, upper)
+print("\n\tYou've only ",round(math.log(upper - lower + 1, 2))," chances to guess the integer!\n")
+
+# Initializing the number of guesses.
+count = 0
+
+# for calculation of minimum number of
+# guesses depends upon range
+while count < math.log(upper - lower + 1, 2):
+    count += 1
+
+    # taking guessing number as input
+    guess = int(input("Guess a number:- "))
+
+    # Condition testing
+    if x == guess:
+        print("Congratulations you did it in ", count, " try")
+        records[name] = count
+        b = nsmallest(3, records)
+        for i in b:
+            if b.index(i) == 0:
+                print('You are best!')
+            elif b.index(i) == 1:
+                print('It was close! You are in second place!')
+            else:
+                print('You are in top 3! Not bad!')
+
+        # Once guessed, loop will break
+        break
+    elif x > guess:
+        print("You guessed too small!")
+    elif x < guess:
+        print("You Guessed too high!")
+
+# If Guessing is more than required guesses,
+# shows this output.
+if count >= math.log(upper - lower + 1, 2):
+    print("\nThe number is %d" % x)
+    print("\tBetter Luck Next time!")
